@@ -1,0 +1,24 @@
+# -*- coding:utf-8 -*-
+
+import urllib2
+import re
+from bs4 import BeautifulSoup
+
+
+
+root_url = urllib2.urlopen('http://coding.imooc.com/')
+
+buf = root_url.read()
+
+listurl = re.findall(r'http:/.+\.jpg',buf)
+print listurl
+
+i = 0
+for url in listurl:
+        f = open(str(i) + '.jpg', 'wb')
+        req = urllib2.urlopen(url)
+        buf = req.read()
+        f.write(buf)
+        i+=1
+
+
